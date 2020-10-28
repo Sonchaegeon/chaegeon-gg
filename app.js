@@ -33,6 +33,6 @@ app.get('/search', async (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log("server running on 3000");
+app.listen(80, () => {
+    console.log("server running on 80");
 });
