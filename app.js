@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const axios = require('axios');
+const async = require('async');
+const api = require('./models/league');
 
 const app = express();
 
@@ -14,20 +15,14 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/search', (req, res) => {
-    var summmonerName = (encodeURI(req.query.name));
-    axios.get(`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summmonerName}?api_key=RGAPI-5e305105-c00f-4993-bb55-7e9087a05459`)
-        .then(response => {
-            var data = response.data;
-            res.render('summoner', {
-                name: data.name,
-                level: data.summonerLevel 
-            })
-            console.log(data);
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+app.get('/search', async (req, res) => {
+    const summoner = await api.SummonerName(req);
+    const result = await api.Rank(summoner.id);
+
+    res.render('summoner', {
+        name: summoner.name,
+        level: summoner.summonerLevel
+    });
 });
 
 app.listen(3000, () => {
