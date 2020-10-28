@@ -27,7 +27,9 @@ app.get('/search', async (req, res) => {
         //Rank
         tier: rank[0].tier,
         rank: rank[0].rank,
-        lp: rank[0].leaguePoints
+        lp: rank[0].leaguePoints,
+        win: rank[0].wins,
+        lose: rank[0].losses
     });
 });
 
