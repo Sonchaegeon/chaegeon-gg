@@ -5,6 +5,8 @@ const api = require('./models/league');
 
 const app = express();
 
+const port = process.env.PORT || 3000;
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
@@ -33,6 +35,6 @@ app.get('/search', async (req, res) => {
     });
 });
 
-app.listen(80, () => {
+app.listen(port, () => {
     console.log("server running on 80");
 });
