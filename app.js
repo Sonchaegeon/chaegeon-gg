@@ -17,11 +17,17 @@ app.get('/', (req, res) => {
 
 app.get('/search', async (req, res) => {
     const summoner = await api.SummonerName(req);
-    const result = await api.Rank(summoner.id);
+    const rank = await api.Rank(summoner.id);
 
     res.render('summoner', {
+        //Summoner
         name: summoner.name,
-        level: summoner.summonerLevel
+        level: summoner.summonerLevel,
+
+        //Rank
+        tier: rank[0].tier,
+        rank: rank[0].rank,
+        lp: rank[0].leaguePoints
     });
 });
 
