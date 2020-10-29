@@ -6,6 +6,16 @@ const api = require('./models/league');
 const app = express();
 
 const port = process.env.PORT || 3000;
+const analytics = `
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DNBBZ7GJ99"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DNBBZ7GJ99');
+</script>`;
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -14,7 +24,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', {analytics: analytics});
 });
 
 app.get('/search', async (req, res) => {
