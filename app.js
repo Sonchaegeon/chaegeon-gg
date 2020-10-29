@@ -32,6 +32,8 @@ app.get('/search', async (req, res) => {
     const rank = await api.Rank(summoner.id);
 
     res.render('summoner', {
+        analytics: analytics,
+
         //Summoner
         name: summoner.name,
         level: summoner.summonerLevel,
