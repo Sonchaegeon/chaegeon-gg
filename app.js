@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get('/search', async (req, res) => {
     const summoner = await api.SummonerName(req);
     const rank = await api.Rank(summoner.id);
-
+    const champName = await api.GetChampName(39);
     res.render('summoner', {
         analytics: analytics,
 
