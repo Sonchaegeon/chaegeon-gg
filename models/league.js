@@ -20,8 +20,23 @@ module.exports = {
             }
         }
     },
-    GetMatches: async (summonerId) => {
-        const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerId}?api_key=${api_key}`)
+    GetMatcheLists: async (summonerAccountId) => {
+        const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerAccountId}?api_key=${api_key}`)
         return response.data.matches;
-    }
+    },
+    GetMatches: async (matchId) => {
+        const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matches/${matchId}?api_key=${api_key}`)
+        return response.data;
+    },
+    GetParticipants: async (participants, championId) => {
+        let participantId;
+        const obj = {};
+        for(var i = 0; i < 10; i++){
+            if(participants[i].championId == championId){
+                participantId = i;
+            }
+        }
+        obj.win = participants[participantId].stats.win;
+        return obj;
+    },
 }
