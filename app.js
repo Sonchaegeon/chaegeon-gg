@@ -50,7 +50,7 @@ app.get('/search', async (req, res) => {
 
         //Matches
         champion: champName,
-        win: participant.win
+        gameWin: participant.win
     });
 });
 
