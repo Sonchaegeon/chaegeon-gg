@@ -34,7 +34,6 @@ app.get('/search', async (req, res) => {
     const matches = await api.GetMatches(matchLists[0].gameId);
     const champName = await api.GetChampName(matchLists[0].champion);
     const participant = await api.GetParticipants(matches.participants, matchLists[0].champion);
-    console.log(participant);
     res.render('summoner', {
         analytics: analytics,
 
