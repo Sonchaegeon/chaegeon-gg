@@ -22,6 +22,6 @@ module.exports = {
     },
     GetMatches: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerId}?api_key=${api_key}`)
-        return response.matches;
+        return response.data.matches;
     }
 }
