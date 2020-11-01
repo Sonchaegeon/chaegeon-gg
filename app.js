@@ -31,6 +31,7 @@ app.get('/search', async (req, res) => {
     const summoner = await api.SummonerName(req);
     const rank = await api.Rank(summoner.id);
     const matchLists = await api.GetMatcheLists(summoner.accountId);
+    console.log(matchLists[0].gameId);
     const matches = await api.GetMatches(matchLists[0].gameId);
     const champName = await api.GetChampName(matchLists[0].champion);
     const participant = await api.GetParticipants(matches.participants, matchLists[0].champion);
@@ -50,7 +51,10 @@ app.get('/search', async (req, res) => {
 
         //Matches
         champion: champName,
-        gameWin: participant.win
+        gameWin: participant.win,
+        kill: participant.kill,
+        death: participant.death,
+        assist: participant.assist,
     });
 });
 

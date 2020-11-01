@@ -30,13 +30,18 @@ module.exports = {
     },
     GetParticipants: async (participants, championId) => {
         let participantId;
+        let player;
         const obj = {};
         for(var i = 0; i < 10; i++){
             if(participants[i].championId == championId){
                 participantId = i;
             }
         }
-        obj.win = participants[participantId].stats.win;
+        player = participants[participantId];
+        obj.win = player.stats.win;
+        obj.kill = player.stats.kills;
+        obj.death = player.stats.deaths;
+        obj.assist = player.stats.assists;
         return obj;
     },
 }
