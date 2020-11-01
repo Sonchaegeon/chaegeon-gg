@@ -8,13 +8,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 const analytics = `
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DNBBZ7GJ99"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LYFVG3S0GM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-DNBBZ7GJ99');
+  gtag('config', 'G-LYFVG3S0GM');
 </script>`;
 
 app.set('views', __dirname + '/views');
@@ -36,6 +36,7 @@ app.get('/search', async (req, res, next) => {
         const champName = await api.GetChampName(matchLists[0].champion);
         const participant = await api.GetParticipants(matches.participants, matchLists[0].champion);
         res.render('summoner', {
+            //Analytics
             analytics: analytics,
 
             //Summoner
