@@ -1,5 +1,5 @@
 const axios = require('axios');
-var api_key = "RGAPI-0018afa1-b0b6-4e57-9a93-b4c7f6d33d00";
+var api_key = "RGAPI-fb4e2278-a048-44c2-ba37-113735315824";
 var champJsonVersion = "10.22.1";
 module.exports = {
     SummonerName: async (req) => {
