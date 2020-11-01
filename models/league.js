@@ -43,6 +43,7 @@ module.exports = {
         obj.kill = player.stats.kills;
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
+        obj.lane = player.timeline.lane;
         return obj;
     },
 }

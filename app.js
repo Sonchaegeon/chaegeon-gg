@@ -55,6 +55,7 @@ app.get('/search', async (req, res, next) => {
             kill: participant.kill,
             death: participant.death,
             assist: participant.assist,
+            lane: participant.lane,
         });
     } catch (e){
         const status = e.response.status;
