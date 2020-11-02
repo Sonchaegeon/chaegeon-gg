@@ -45,11 +45,11 @@ app.get('/search', async (req, res, next) => {
             level: summoner.summonerLevel,
 
             //Rank
-            tier: rank[0].tier,
-            rank: rank[0].rank,
-            lp: rank[0].leaguePoints,
-            win: rank[0].wins,
-            lose: rank[0].losses,
+            tier: rank.tier,
+            rank: rank.rank,
+            lp: rank.lp,
+            win: rank.win,
+            lose: rank.lose,
 
             //Matches
             champion: champName,
@@ -60,7 +60,8 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
         });
     } catch (e){
-        if(status === 404) next(new Error("소환사를 찾을 수 없습니다"));
+        if(e.status === 404) next(new Error("소환사를 찾을 수 없습니다"));
+        else console.log(e);
     }
 });
 
