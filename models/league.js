@@ -1,5 +1,5 @@
 const axios = require('axios');
-var api_key = "RGAPI-fb4e2278-a048-44c2-ba37-113735315824";
+var api_key = "RGAPI-8038082f-0b17-4f03-afa0-d7dc5c8ac696";
 var champJsonVersion = "10.22.1";
 module.exports = {
     SummonerName: async (req) => {
@@ -10,7 +10,9 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-        return response.data;
+        console.log(response.data);
+        if(response.data === null) throw error;
+        else return response.data;
     },
     GetChampName: async (id) => {
         const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${champJsonVersion}/data/ko_KR/champion.json`)

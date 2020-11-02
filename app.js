@@ -59,7 +59,6 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
         });
     } catch (e){
-        const status = e.response.status;
         if(status === 404) next(new Error("소환사를 찾을 수 없습니다"));
     }
 });
