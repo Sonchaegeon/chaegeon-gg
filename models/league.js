@@ -10,9 +10,7 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-        console.log(response.data);
-        if(response.data === null) throw error;
-        else return response.data;
+        return response.data;
     },
     GetChampName: async (id) => {
         const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${champJsonVersion}/data/ko_KR/champion.json`)

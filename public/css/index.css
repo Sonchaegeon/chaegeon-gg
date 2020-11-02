@@ -1,0 +1,73 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    background: #D6ACD4;
+    overflow: hidden;
+}
+
+.body {
+    width: 100%;
+    height: 100%;
+    background: #CF8DDB;
+    transform: rotate(-4deg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-50%);
+}
+
+.contentWrapper img {
+    margin: 0 auto;
+}
+
+.inputWrapper {
+    margin-top: 10px;
+    background: white;
+    width: 410px;
+    height: 38px;
+    padding: 5px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputWrapper input {
+    border: none;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+.inputWrapper input:focus {
+    outline: none;
+}
+
+.inputWrapper button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.inputWrapper button:focus {
+    outline: none;
+}

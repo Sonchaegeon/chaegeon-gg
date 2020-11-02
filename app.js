@@ -20,6 +20,7 @@ const analytics = `
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+app.use('/static', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
