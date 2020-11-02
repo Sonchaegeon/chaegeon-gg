@@ -10,7 +10,15 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-        if(response.data.length == 0) return "Unranked";
+        if(response.data.length == 0) {
+            let obj = {};
+            obj.tier = "Unranked";
+            obj.rank = null;
+            obj.lp = 0;
+            obj.win = 0;
+            obj.lose = 0;
+            return obj;
+        }
         else{
             let obj = {};
             const data = response.data[0];

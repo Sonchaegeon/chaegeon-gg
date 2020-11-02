@@ -10,7 +10,12 @@
 <body>
     <h1><%=name%> Level: <%=level%> </h1>
     <p>Rank: <%=tier%> <%=rank%> <%=lp%>LP </p>
-    <p>Win: <%=win%> Lose: <%=lose%> <%=parseInt(win/(win + lose) * 100)%>%  </p>
+    <p>Win: <%=win%> Lose: <%=lose%>
+        <% if(tier !== "Unranked") { %>
+            <%=parseInt(win/(win + lose) * 100)%>% </p>
+        <% } else {%>
+            </p> 
+        <% } %> 
     <h2>최근 게임</h2>
     <%=lane%> <%=champion%>
         <%if(gameWin === true) {%>
