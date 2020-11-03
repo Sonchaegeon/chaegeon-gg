@@ -38,6 +38,11 @@ html, body {
     margin: 0 auto;
 }
 
+#mobonDivBanner_477180 {
+    display: flex;
+    flex-direction: column;
+}
+
 .inputWrapper {
     margin-top: 10px;
     background: white;
