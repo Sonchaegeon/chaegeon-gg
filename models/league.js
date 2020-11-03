@@ -1,5 +1,5 @@
 const axios = require('axios');
-var api_key = "RGAPI-b5c56362-e5f8-43d5-831d-3b0f5bb09ef9";
+var api_key = "RGAPI-a5ce3210-05a4-469b-91a8-f7f1eab031d1";
 var champJsonVersion = "10.22.1";
 module.exports = {
     SummonerName: async (req) => {
@@ -10,7 +10,7 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-        if(response.data.length == 0) {
+            if(response.data.length == 0) {
             let obj = {};
             obj.tier = "Unranked";
             obj.rank = null;
