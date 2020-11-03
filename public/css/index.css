@@ -26,12 +26,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .contentWrapper {
     display: flex;
     flex-direction: column;
-    transform: translateY(-50%);
+    transform: translateY(-25%);
 }
 
 .contentWrapper img {
@@ -40,7 +41,6 @@ html, body {
 
 #mobonDivBanner_477180 {
     display: flex;
-    flex-direction: column;
 }
 
 .inputWrapper {
