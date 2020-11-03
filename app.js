@@ -60,8 +60,8 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
         });
     } catch (e){
-        if(e.status === 404) next(new Error("소환사를 찾을 수 없습니다"));
-        else console.log(e);
+        if(e.response.status === 404) next(new Error("소환사를 찾을 수 없습니다"));
+        else next(new Error("ERROR"));
     }
 });
 
