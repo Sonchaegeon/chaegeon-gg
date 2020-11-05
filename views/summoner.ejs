@@ -23,6 +23,9 @@
         <% } else { %>
             패배
         <% } %>
-    <%=kill%> / <%=death%> / <%=assist%>   
+    <%=kill%> / <%=death%> / <%=assist%> 
+    <% for(var i = 0; i < 7; i++) { %>
+        <img src="<%=items[i]%>">
+    <% } %>  
 </body>
 </html>

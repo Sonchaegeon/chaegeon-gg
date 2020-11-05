@@ -1,6 +1,6 @@
 const axios = require('axios');
 var api_key = "RGAPI-c75a2a81-c0c5-4b22-bdef-31aa33a3b7c5";
-var champJsonVersion = "10.22.1";
+var jsonVersion = "10.22.1";
 module.exports = {
     SummonerName: async (req) => {
         var summonerName = (encodeURI(req.query.name));
@@ -29,9 +29,9 @@ module.exports = {
             obj.lose = data.losses;
             return obj;
         }
-   },
+    },
     GetChampName: async (id) => {
-        const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${champJsonVersion}/data/ko_KR/champion.json`)
+        const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/champion.json`)
         const championList = response.data.data;
         for(var i in championList){
             if(championList[i].key == id){
@@ -40,6 +40,7 @@ module.exports = {
         }
     },
     GetMatcheLists: async (summonerAccountId) => {
+        //4753465962
         const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerAccountId}?api_key=${api_key}`)
         return response.data.matches;
     },
@@ -50,6 +51,7 @@ module.exports = {
     GetParticipants: async (participants, championId) => {
         let participantId;
         let player;
+        let items = [];
         let obj = {};
         for(var i = 0; i < 10; i++){
             if(participants[i].championId == championId){
@@ -61,7 +63,18 @@ module.exports = {
         obj.kill = player.stats.kills;
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
+        
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item1}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item2}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item3}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item4}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item5}.png`);
+        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item6}.png`);
+
+        obj.items = items;
         obj.lane = player.timeline.lane;
+        console.log(obj);
         return obj;
-    },
+    }
 }

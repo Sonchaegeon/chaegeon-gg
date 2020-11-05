@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const async = require('async');
 const api = require('./models/league');
 
 const app = express();
@@ -24,7 +23,7 @@ app.use('/static', express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.render('index', {analytics: analytics});
 });
 
@@ -58,13 +57,14 @@ app.get('/search', async (req, res, next) => {
             death: participant.death,
             assist: participant.assist,
             lane: participant.lane,
+            items: participant.items,
         });
     } catch (e){
+        console.log(e);
         if(e.response.status === 404) next(new Error("소환사를 찾을 수 없습니다"));
         else next(new Error("ERROR"));
     }
 });
-
 app.use(function (error, req, res, next) {
     res.render('error', { error: error.message });
 })
