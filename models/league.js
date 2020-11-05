@@ -74,7 +74,6 @@ module.exports = {
 
         obj.items = items;
         obj.lane = player.timeline.lane;
-        console.log(obj);
         return obj;
     }
 }

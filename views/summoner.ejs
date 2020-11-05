@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1><%=name%> Level: <%=level%> </h1>
-    <p>Rank: <%=tier%> <%=rank%> <%=lp%>LP </p>
+    <p>Rank: <img src="/static/image/ranked-emblems/Emblem_<%=tier%>.png" width="100px" height="100px"><%=tier%> <%=rank%> <%=lp%>LP </p>
     <p>Win: <%=win%> Lose: <%=lose%>
         <% if(tier !== "Unranked") { %>
             <%=parseInt(win/(win + lose) * 100)%>% </p>
