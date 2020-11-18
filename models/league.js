@@ -1,9 +1,10 @@
 const axios = require('axios');
+const cheerio = require('cheerio');
 var api_key = "RGAPI-d56f0847-c23e-4b73-b67e-d270b8dfc2ae";
 var jsonVersion = "10.23.1";
 module.exports = {
-    SummonerName: async (req) => {
-        var summonerName = (encodeURI(req.query.name));
+    SummonerName: async (name) => {
+        var summonerName = (encodeURI(name));
         const response = await axios.get(`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`)
         if(response.status === 404) throw error;
         else return response.data;
@@ -75,5 +76,12 @@ module.exports = {
         obj.items = items;
         obj.lane = player.timeline.lane;
         return obj;
+    },
+    GetRanking: async (name) => {
+        var summonerName = (encodeURI(name));
+        const response = await axios.get(`https://www.op.gg/summoner/userName=${summonerName}`)
+        const $ = cheerio.load(response.data);
+        const $bodyList = $("div.LadderRank a").children("span.ranking");
+        return $bodyList.text();
     }
 }
