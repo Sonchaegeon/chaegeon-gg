@@ -42,7 +42,8 @@ app.get('/search', async (req, res, next) => {
 
             //Summoner
             name: summoner.name,
-            level: summoner.summonerLevel,
+            level: summoner.level,
+            profileId: summoner.profileId,
 
             //Rank
             tier: rank.tier,

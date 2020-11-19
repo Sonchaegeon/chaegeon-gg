@@ -4,10 +4,16 @@ var api_key = "RGAPI-bf3525ac-d816-47a6-bbc1-b73242c7df65";
 var jsonVersion = "10.23.1";
 module.exports = {
     SummonerName: async (name) => {
-        var summonerName = (encodeURI(name));
+        let summonerName = (encodeURI(name));
+        let obj = {};
         const response = await axios.get(`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`)
         if(response.status === 404) throw error;
-        else return response.data;
+        obj.name = response.data.name;
+        obj.level = response.data.summonerLevel;
+        obj.profileId = `http://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/profileicon/${response.data.profileIconId}.png`;
+        obj.id = response.data.id;
+        obj.accountId = response.data.accountId;
+        return obj;
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
