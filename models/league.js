@@ -78,11 +78,13 @@ module.exports = {
         return obj;
     },
     GetRanking: async (name) => {
-        var summonerName = (encodeURI(name));
+        let summonerName = (encodeURI(name));
+        let obj = {};
         const response = await axios.get(`https://www.op.gg/summoner/userName=${summonerName}`)
         const $ = cheerio.load(response.data);
         const $bodyList = $("div.LadderRank a").children("span.ranking");
-        console.log($("div.LadderRank a").html());
-        return $bodyList.text();
+        obj.ranking = $bodyList.text();
+        obj.percent = $("div.LadderRank a").html().match(/(\d*.\d*\%)/g);
+        return obj;
     }
 }

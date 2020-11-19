@@ -50,7 +50,8 @@ app.get('/search', async (req, res, next) => {
             lp: rank.lp,
             win: rank.win,
             lose: rank.lose,
-            ranking: ranking,
+            ranking: ranking.ranking,
+            percent: ranking.percent,
 
             //Matches
             champion: champName,
