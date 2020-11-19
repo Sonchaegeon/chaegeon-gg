@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-var api_key = "RGAPI-d56f0847-c23e-4b73-b67e-d270b8dfc2ae";
+var api_key = "RGAPI-bf3525ac-d816-47a6-bbc1-b73242c7df65";
 var jsonVersion = "10.23.1";
 module.exports = {
     SummonerName: async (name) => {
@@ -82,6 +82,7 @@ module.exports = {
         const response = await axios.get(`https://www.op.gg/summoner/userName=${summonerName}`)
         const $ = cheerio.load(response.data);
         const $bodyList = $("div.LadderRank a").children("span.ranking");
+        console.log($("div.LadderRank a").html());
         return $bodyList.text();
     }
 }
