@@ -27,6 +27,10 @@ app.get('/', async (req, res) => {
     res.render('index', {analytics: analytics});
 });
 
+app.get('/riot.txt', (req, res) => {
+    res.send("53dc0829-23b4-49e7-862b-c882e1b5a370");
+});
+
 app.get('/search', async (req, res, next) => {
     try{
         const summoner = await api.SummonerName(req.query.name);
