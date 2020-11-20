@@ -25,7 +25,22 @@ app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
     res.render('index', {analytics: analytics});
+    
 });
+
+app.get('/multi', (req, res) => {
+    if(req.query.name) {
+        let names = req.query.name;
+
+        names = names.split(/\s님이 방에 참가했습니다./g);
+        for(let i = 0; i < 5; i++){
+            names[i] = names[i].replace("\r\n    ", "");
+        }
+        res.send(names);
+    } else{
+        res.render('multi');
+    }
+})
 
 app.get('/riot.txt', (req, res) => {
     res.send("53dc0829-23b4-49e7-862b-c882e1b5a370");
@@ -73,6 +88,7 @@ app.get('/search', async (req, res, next) => {
         else next(new Error("ERROR"));
     }
 });
+
 app.use(function (error, req, res, next) {
     res.render('error', { error: error.message });
 })
