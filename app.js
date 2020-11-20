@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 
 app.get('/', async (req, res) => {
     res.render('index', {analytics: analytics});
-    
 });
 
 app.get('/multi', (req, res) => {
@@ -35,8 +34,9 @@ app.get('/multi', (req, res) => {
         names = names.split(/\s님이 방에 참가했습니다./g);
         for(let i = 0; i < 5; i++){
             names[i] = names[i].replace("\r\n    ", "");
+            names[i] = names[i].replace("\r\n", "");
         }
-        res.send(names);
+        res.json(names);
     } else{
         res.render('multi');
     }
