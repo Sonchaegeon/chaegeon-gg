@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-var api_key = "RGAPI-bb3cf2f7-ae76-4077-a2b0-4e919de7a7f9";
+var api_key = "RGAPI-1a9d86d9-d830-47e4-b5fc-5719e22dbac4";
 var jsonVersion = "10.23.1";
 module.exports = {
     SummonerName: async (name) => {
