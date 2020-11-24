@@ -4,6 +4,7 @@ var api_key = "RGAPI-001d9b95-0b14-4ea6-bf2a-edf096caa9d3";
 var jsonVersion = "10.23.1";
 module.exports = {
     SummonerName: async (name) => {
+        // acount: wX4_9rIrJy7t4WvPB1aYpJofSh49y0SracqGDFKKajJrPqE
         let summonerName = (encodeURI(name));
         let obj = {};
         const response = await axios.get(`https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${api_key}`)
@@ -55,13 +56,13 @@ module.exports = {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matches/${matchId}?api_key=${api_key}`)
         return response.data;
     },
-    GetParticipants: async (participants, championId) => {
+    GetParticipants: async (participants, participantIdentities, accountId) => {
         let participantId;
         let player;
         let items = [];
         let obj = {};
         for(var i = 0; i < 10; i++){
-            if(participants[i].championId == championId){
+            if(participantIdentities[i].player.accountId == accountId){
                 participantId = i;
             }
         }
