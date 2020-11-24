@@ -73,9 +73,9 @@ module.exports = {
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
 
-        obj.championName = this.GetChampName(player.championId);
+        championName = this.GetChampName(player.championId);
 
-        obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/.png`
+        obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${championName}.png`
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item1}.png`);
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item2}.png`);
