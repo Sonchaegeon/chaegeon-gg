@@ -39,7 +39,7 @@ module.exports = {
         }
     },
     GetChampName: async (id) => {
-        const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/champion.json`)
+        const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/en_US/champion.json`)
         const championList = response.data.data;
         for(var i in championList){
             if(championList[i].key == id){
