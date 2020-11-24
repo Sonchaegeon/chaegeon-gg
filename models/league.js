@@ -61,6 +61,7 @@ module.exports = {
         let player;
         let items = [];
         let obj = {};
+        let championName;
         for(var i = 0; i < 10; i++){
             if(participantIdentities[i].player.accountId == accountId){
                 participantId = i;
@@ -71,7 +72,10 @@ module.exports = {
         obj.kill = player.stats.kills;
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
-        
+
+        championName = this.GetChampName(player.championId);
+
+        obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/.png`
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item1}.png`);
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item2}.png`);

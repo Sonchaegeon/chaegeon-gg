@@ -81,6 +81,7 @@ app.get('/search', async (req, res, next) => {
             assist: participant.assist,
             lane: participant.lane,
             items: participant.items,
+            champIcon: participant.champIcon
         });
     } catch (e){
         console.log(e);
