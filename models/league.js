@@ -73,7 +73,7 @@ module.exports = {
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
 
-        championName = this.GetChampName(player.championId);
+        obj.championName = this.GetChampName(player.championId);
 
         obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/.png`
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
