@@ -52,8 +52,8 @@ app.get('/search', async (req, res, next) => {
         const ranking = await api.GetRanking(req.query.name);
         const rank = await api.Rank(summoner.id);
         const matchLists = await api.GetMatcheLists(summoner.accountId);
-        const matches = await api.GetMatches(matchLists[0].gameId);
-        const champName = await api.GetChampName(matchLists[0].champion);
+        const matches = await api.GetMatches(matchLists[17].gameId);
+        const champName = await api.GetChampName(matchLists[17].champion);
         const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId);
         res.render('summoner', {
             //Analytics
