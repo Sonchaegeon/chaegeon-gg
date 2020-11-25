@@ -11,7 +11,7 @@
     <h2>랭킹: <%=ranking%>등 상위 <%=percent%> </h2>
     <p>Rank: <img src="/static/image/ranked-emblems/Emblem_<%=soloTier%>.png" width="100px" height="100px"><%=soloTier%> <%=soloRank%> <%=soloLp%>LP </p>
     <p>Win: <%=soloWin%> Lose: <%=soloLose%>
-        <% if(tier !== "Unranked") { %>
+        <% if(soloTier !== "Unranked") { %>
             <%=parseInt(soloWin/(soloWin + soloLose) * 100)%>% </p>
         <% } else {%>
             </p> 

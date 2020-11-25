@@ -74,6 +74,7 @@ app.get('/search', async (req, res, next) => {
             soloLp: rank.solo.lp,
             soloWin: rank.solo.win,
             soloLose: rank.solo.lose,
+            
             ranking: ranking.ranking,
             percent: ranking.percent,
 

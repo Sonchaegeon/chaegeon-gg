@@ -19,26 +19,10 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-        /*if(response.data.length == 0) {
-            let obj = {};
-            obj.tier = "Unranked";
-            obj.rank = null;
-            obj.lp = 0;
-            obj.win = 0;
-            obj.lose = 0;
-            return obj;
-        }
-        else{
-            let obj = {};
-            const data = response.data[0];
-            obj.tier = data.tier;
-            obj.rank = data.rank;
-            obj.lp = data.leaguePoints;
-            obj.win = data.wins;
-            obj.lose = data.losses;
-            return obj;
-        }*/
-        let obj = {};
+        let obj = {
+            solo: {},
+            flex: {},
+        };
 
         const resetSolo = () => {
             obj.solo.tier = "Unranked";
@@ -66,11 +50,12 @@ module.exports = {
                     flexRankIndex = i;
                 }
             }
-
+            const Solodata = response.data[soloRankIndex];
+            const Flexdata = response.data[flexRankIndex];
             if(Solodata === null) {
                 resetSolo();
             } else {
-                const Solodata = response.data[soloRankIndex];
+                console.log(Solodata.tier);
                 obj.solo.tier = Solodata.tier;
                 obj.solo.rank = Solodata.rank;
                 obj.solo.lp = Solodata.leaguePoints;
@@ -81,7 +66,7 @@ module.exports = {
             if(Flexdata === null) {
                 resetFlex();
             } else {
-                const Flexdata = response.data[flexRankIndex];
+                console.log(Flexdata);
                 obj.flex.tier = Flexdata.tier;
                 obj.flex.rank = Flexdata.rank;
                 obj.flex.lp = Flexdata.leaguePoints;
