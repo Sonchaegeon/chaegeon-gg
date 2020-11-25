@@ -57,6 +57,8 @@ app.get('/search', async (req, res, next) => {
         const matches = await api.GetMatches(matchLists[0].gameId);
         const champName = await api.GetChampName(matchLists[0].champion);
         const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId, champName);
+        const enemyChampName = await api.GetChampName(participant.enemy);
+        const enemyChampIcon = await api.GetChampIcon(enemyChampName);
         res.render('summoner', {
             //Analytics
             analytics: analytics,
@@ -84,8 +86,9 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
             items: participant.items,
             champIcon: participant.champIcon,
-            enemy: participant.enemyChampName,
-            enemyChampIcon: participant.enemyChampIcon
+            enemy: participant.enemy,
+            enemyChampName: enemyChampName,
+            enemyChampIcon: enemyChampIcon,
         });
     } catch (e){
         console.log(e);

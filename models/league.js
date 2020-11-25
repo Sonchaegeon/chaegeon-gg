@@ -56,6 +56,10 @@ module.exports = {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matches/${matchId}?api_key=${api_key}`)
         return response.data;
     },
+    GetChampIcon: async (champName) => {
+        champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${champName}.png`;
+        return champIcon;
+    },
     GetParticipants: async (participants, participantIdentities, accountId, championName) => {
         let participantId;
         let player;
@@ -76,8 +80,6 @@ module.exports = {
         for(var i = 0; i < 10; i++){
             if(participants[i].teamId != player.teamId && player.timeline.lane === participants[i].timeline.lane){
                 obj.enemy = participants[i].championId;
-                obj.enemyChampName = await this.GetChampName(obj.enemy);
-                obj.enemyChampIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${obj.enemyChampName}.png`;
                 break;
             }
         }
