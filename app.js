@@ -52,6 +52,8 @@ app.get('/search', async (req, res, next) => {
         const ranking = await api.GetRanking(req.query.name);
         const rank = await api.Rank(summoner.id);
         const matchLists = await api.GetMatcheLists(summoner.accountId);
+
+        // match가 null일 경우
         const matches = await api.GetMatches(matchLists[0].gameId);
         const champName = await api.GetChampName(matchLists[0].champion);
         const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId, champName);
@@ -82,6 +84,7 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
             items: participant.items,
             champIcon: participant.champIcon,
+            enemy: await api.GetChampName(participant.enemy),
         });
     } catch (e){
         console.log(e);

@@ -64,6 +64,7 @@ module.exports = {
         for(var i = 0; i < 10; i++){
             if(participantIdentities[i].player.accountId == accountId){
                 participantId = i;
+                break;
             }
         }
         player = participants[participantId];
@@ -71,6 +72,13 @@ module.exports = {
         obj.kill = player.stats.kills;
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
+
+        for(var i = 0; i < 10; i++){
+            if(participants[i].teamId != player.teamId && player.timeline.lane === participants[i].timeline.lane){
+                obj.enemy = participants[i].championId;
+                break;
+            }
+        }
 
         obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${championName}.png`;
         items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
