@@ -142,8 +142,14 @@ module.exports = {
         const response = await axios.get(`https://www.op.gg/summoner/userName=${summonerName}`)
         const $ = cheerio.load(response.data);
         const $bodyList = $("div.LadderRank a").children("span.ranking");
-        obj.ranking = $bodyList.text();
-        obj.percent = $("div.LadderRank a").html().match(/\d\d*.\d*\%/g);
-        return obj;
+        if($bodyList.text() === ""){
+            obj.ranking = 0;
+            obj.percent = "0%";
+            return obj
+        } else {
+            obj.ranking = $bodyList.text();
+            obj.percent = $("div.LadderRank a").html().match(/\d\d*.\d*\%/g);
+            return obj;
+        }
     }
 }
