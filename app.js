@@ -84,7 +84,8 @@ app.get('/search', async (req, res, next) => {
             lane: participant.lane,
             items: participant.items,
             champIcon: participant.champIcon,
-            enemy: await api.GetChampName(participant.enemy),
+            enemy: participant.enemyChampName,
+            enemyChampIcon: participant.enemyChampIcon
         });
     } catch (e){
         console.log(e);
