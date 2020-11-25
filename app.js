@@ -96,6 +96,7 @@ app.get('/search', async (req, res, next) => {
             enemy: participant.enemy,
             enemyChampName: enemyChampName,
             enemyChampIcon: enemyChampIcon,
+            gameMode: matches.gameMode,
         });
     } catch (e){
         console.log(e);

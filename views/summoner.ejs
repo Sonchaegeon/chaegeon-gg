@@ -9,7 +9,7 @@
 <body>
     <h1><img src="<%=profileId%>" width="80px" height="80px"> <%=name%> Level: <%=level%> </h1>
     <h2>랭킹: <%=ranking%>등 상위 <%=percent%> </h2>
-    <p>솔로 랭크: <img src="/static/image/ranked-emblems/Emblem_<%=soloTier%>.png" width="100px" height="100px"><%=soloTier%> <%=soloRank%> <%=soloLp%>LP </p>
+    <p>솔로 랭크: <img src="/static/image/ranked-emblems/Emblem_<%=soloTier.toUpperCase()%>.png" width="100px" height="100px"><%=soloTier%> <%=soloRank%> <%=soloLp%>LP </p>
     <p>Win: <%=soloWin%> Lose: <%=soloLose%>
         <% if(soloTier !== "Unranked") { %>
             <%=parseInt(soloWin/(soloWin + soloLose) * 100)%>% </p>
@@ -17,7 +17,7 @@
             </p> 
         <% } %> 
 
-    <p>자유 랭크: <img src="/static/image/ranked-emblems/Emblem_<%=flexTier%>.png" width="100px" height="100px"><%=flexTier%> <%=flexRank%> <%=flexLp%>LP </p>
+    <p>자유 랭크: <img src="/static/image/ranked-emblems/Emblem_<%=flexTier.toUpperCase()%>.png" width="100px" height="100px"><%=flexTier%> <%=flexRank%> <%=flexLp%>LP </p>
     <p>Win: <%=flexWin%> Lose: <%=flexLose%>
         <% if(flexTier !== "Unranked") { %>
             <%=parseInt(flexWin/(flexWin + flexLose) * 100)%>% </p>
@@ -26,6 +26,7 @@
         <% } %>    
     <hr>
     <h2>최근 게임</h2>
+    <p>게임모드: <%=gameMode%></p>
     <p><img src="<%=champIcon%>" width="80px" height="80px"> <%=lane%> <%=champion%> vs <%=enemyChampName%>  <img src="<%=enemyChampIcon%>" width="80px" height="80px"></p>
         <%if(gameWin === true) {%>
             승리

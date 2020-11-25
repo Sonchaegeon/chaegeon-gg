@@ -96,7 +96,7 @@ module.exports = {
         return response.data;
     },
     GetChampIcon: async (champName) => {
-        champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${champName}.png`;
+        champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${champName.replace(/ /g, "")}.png`;
         return champIcon;
     },
     GetParticipants: async (participants, participantIdentities, accountId, championName) => {
