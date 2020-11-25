@@ -26,19 +26,22 @@
         <% } %>    
     <hr>
     <h2>최근 게임</h2>
-    <p>게임모드: <%=gameMode%></p>
-    <p><img src="<%=champIcon%>" width="80px" height="80px"> <%=lane%> <%=champion%> vs <%=enemyChampName%>  <img src="<%=enemyChampIcon%>" width="80px" height="80px"></p>
-        <%if(gameWin === true) {%>
-            승리
-        <% } else { %>
-            패배
+    <% for(var i = 0; i < 10; i++) {%> 
+        <p>게임모드: <%=gameMode[i]%></p>
+        <p><img src="<%=champIcon[i]%>" width="80px" height="80px"> <%=lane[i]%> <%=champion[i]%> vs <%=enemyChampName[i]%>  <img src="<%=enemyChampIcon[i]%>" width="80px" height="80px"></p>
+            <%if(gameWin[i] === true) {%>
+                승리
+            <% } else { %>
+                패배
+            <% } %>
+        <%=kill[i]%> / <%=death[i]%> / <%=assist[i]%> 
+        <% for(var j = 0; j < 7; j++) { %>
+            <% if(items[i][j] == 'https://ddragon.leagueoflegends.com/cdn/10.24.1/img/item/0.png') { %>
+                <% continue %> 
+            <% } %>
+            <img src="<%=items[i][j]%>">
         <% } %>
-    <%=kill%> / <%=death%> / <%=assist%> 
-    <% for(var i = 0; i < 7; i++) { %>
-        <% if(items[i] == 'https://ddragon.leagueoflegends.com/cdn/10.24.1/img/item/0.png') { %>
-            <% continue %> 
-        <% } %>
-        <img src="<%=items[i]%>">
-    <% } %>  
+        <hr>
+    <% } %> 
 </body>
 </html>
