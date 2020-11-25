@@ -116,52 +116,6 @@ app.get('/search', async (req, res, next) => {
             enemyChampIcon: enemyChampIcon,
             gameMode: gameMode,
         });
-        /*// match가 null일 경우
-        const matches = await api.GetMatches(matchLists[0].gameId);
-        const champName = await api.GetChampName(matchLists[0].champion);
-        const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId, champName);
-        const enemyChampName = await api.GetChampName(participant.enemy);
-        const enemyChampIcon = await api.GetChampIcon(enemyChampName);
-        res.render('summoner', {
-            //Analytics
-            analytics: analytics,
-
-            //Summoner
-            name: summoner.name,
-            level: summoner.level,
-            profileId: summoner.profileId,
-
-            //Rank
-            soloTier: rank.solo.tier,
-            soloRank: rank.solo.rank,
-            soloLp: rank.solo.lp,
-            soloWin: rank.solo.win,
-            soloLose: rank.solo.lose,
-
-            flexTier: rank.flex.tier,
-            flexRank: rank.flex.rank,
-            flexLp: rank.flex.lp,
-            flexWin: rank.flex.win,
-            flexLose: rank.flex.lose,
-
-            ranking: ranking.ranking,
-            percent: ranking.percent,
-
-            //Matches
-            champion: champName,
-            gameWin: participant.win,
-            kill: participant.kill,
-            death: participant.death,
-            assist: participant.assist,
-            lane: participant.lane,
-            items: participant.items,
-            champIcon: participant.champIcon,
-            enemy: participant.enemy,
-            enemyChampName: enemyChampName,
-            enemyChampIcon: enemyChampIcon,
-            gameMode: matches.gameMode,
-        });
-        */
     } catch (e){
         console.log(e);
         if(e.response.status === 404) next(new Error("소환사를 찾을 수 없습니다"));
