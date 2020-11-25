@@ -69,11 +69,11 @@ app.get('/search', async (req, res, next) => {
             profileId: summoner.profileId,
 
             //Rank
-            tier: rank.tier,
-            rank: rank.rank,
-            lp: rank.lp,
-            win: rank.win,
-            lose: rank.lose,
+            soloTier: rank.solo.tier,
+            soloRank: rank.solo.rank,
+            soloLp: rank.solo.lp,
+            soloWin: rank.solo.win,
+            soloLose: rank.solo.lose,
             ranking: ranking.ranking,
             percent: ranking.percent,
 

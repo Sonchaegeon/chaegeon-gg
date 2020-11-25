@@ -1,9 +1,10 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 var api_key = "RGAPI-001d9b95-0b14-4ea6-bf2a-edf096caa9d3";
-var jsonVersion = "10.23.1";
+var jsonVersion = "10.24.1";
 module.exports = {
     SummonerName: async (name) => {
+        // id: 7NbCIl_c5YUSGy9VXVaNjJ6Qor9Cuggyss9YVM2kLZL9Wq0
         // acount: wX4_9rIrJy7t4WvPB1aYpJofSh49y0SracqGDFKKajJrPqE
         let summonerName = (encodeURI(name));
         let obj = {};
@@ -18,7 +19,7 @@ module.exports = {
     },
     Rank: async (summonerId) => {
         const response = await axios.get(`https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}?api_key=${api_key}`)
-            if(response.data.length == 0) {
+        /*if(response.data.length == 0) {
             let obj = {};
             obj.tier = "Unranked";
             obj.rank = null;
@@ -35,6 +36,62 @@ module.exports = {
             obj.lp = data.leaguePoints;
             obj.win = data.wins;
             obj.lose = data.losses;
+            return obj;
+        }*/
+        let obj = {};
+
+        const resetSolo = () => {
+            obj.solo.tier = "Unranked";
+            obj.solo.rank = null;
+            obj.solo.lp = null;
+            obj.solo.win = null;
+            obj.solo.lose = null;
+        }
+
+        const resetFlex = () => {
+            obj.flex.tier = "Unranked";
+            obj.flex.rank = null;
+            obj.flex.lp = null;
+            obj.flex.win = null;
+            obj.flex.lose = null;
+        }
+
+        if(response.data.length != 0) {
+            let soloRankIndex = null;
+            let flexRankIndex = null;
+            for(var i = 0; i < response.data.length; i++){
+                if(response.data[i].queueType === "RANKED_SOLO_5x5"){
+                    soloRankIndex = i;
+                } else if (response.data[i].queueType === "RANKED_FLEX_SR"){
+                    flexRankIndex = i;
+                }
+            }
+
+            if(Solodata === null) {
+                resetSolo();
+            } else {
+                const Solodata = response.data[soloRankIndex];
+                obj.solo.tier = Solodata.tier;
+                obj.solo.rank = Solodata.rank;
+                obj.solo.lp = Solodata.leaguePoints;
+                obj.solo.win = Solodata.wins;
+                obj.solo.lose = Solodata.losses;
+            }
+            
+            if(Flexdata === null) {
+                resetFlex();
+            } else {
+                const Flexdata = response.data[flexRankIndex];
+                obj.flex.tier = Flexdata.tier;
+                obj.flex.rank = Flexdata.rank;
+                obj.flex.lp = Flexdata.leaguePoints;
+                obj.flex.win = Flexdata.wins;
+                obj.flex.lose = Flexdata.losses;
+            }
+            return obj;
+        } else{
+            resetSolo();
+            resetFlex();
             return obj;
         }
     },
