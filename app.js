@@ -74,7 +74,13 @@ app.get('/search', async (req, res, next) => {
             soloLp: rank.solo.lp,
             soloWin: rank.solo.win,
             soloLose: rank.solo.lose,
-            
+
+            flexTier: rank.flex.tier,
+            flexRank: rank.flex.rank,
+            flexLp: rank.flex.lp,
+            flexWin: rank.flex.win,
+            flexLose: rank.flex.lose,
+
             ranking: ranking.ranking,
             percent: ranking.percent,
 

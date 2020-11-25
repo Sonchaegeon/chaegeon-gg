@@ -55,7 +55,6 @@ module.exports = {
             if(Solodata === null) {
                 resetSolo();
             } else {
-                console.log(Solodata.tier);
                 obj.solo.tier = Solodata.tier;
                 obj.solo.rank = Solodata.rank;
                 obj.solo.lp = Solodata.leaguePoints;
@@ -66,7 +65,6 @@ module.exports = {
             if(Flexdata === null) {
                 resetFlex();
             } else {
-                console.log(Flexdata);
                 obj.flex.tier = Flexdata.tier;
                 obj.flex.rank = Flexdata.rank;
                 obj.flex.lp = Flexdata.leaguePoints;
