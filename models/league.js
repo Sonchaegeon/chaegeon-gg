@@ -143,7 +143,7 @@ module.exports = {
         const $ = cheerio.load(response.data);
         const $bodyList = $("div.LadderRank a").children("span.ranking");
         obj.ranking = $bodyList.text();
-        obj.percent = $("div.LadderRank a").html().match(/(\d*.\d*\%)/g);
+        obj.percent = $("div.LadderRank a").html().match(/\d\d*.\d*\%/g);
         return obj;
     }
 }
