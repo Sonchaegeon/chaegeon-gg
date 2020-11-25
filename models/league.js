@@ -27,17 +27,17 @@ module.exports = {
         const resetSolo = () => {
             obj.solo.tier = "Unranked";
             obj.solo.rank = null;
-            obj.solo.lp = null;
-            obj.solo.win = null;
-            obj.solo.lose = null;
+            obj.solo.lp = 0;
+            obj.solo.win = 0;
+            obj.solo.lose = 0;
         }
 
         const resetFlex = () => {
             obj.flex.tier = "Unranked";
             obj.flex.rank = null;
-            obj.flex.lp = null;
-            obj.flex.win = null;
-            obj.flex.lose = null;
+            obj.flex.lp = 0;
+            obj.flex.win = 0;
+            obj.flex.lose = 0;
         }
 
         if(response.data.length != 0) {
@@ -52,7 +52,7 @@ module.exports = {
             }
             const Solodata = response.data[soloRankIndex];
             const Flexdata = response.data[flexRankIndex];
-            if(Solodata === null) {
+            if(Solodata === undefined) {
                 resetSolo();
             } else {
                 obj.solo.tier = Solodata.tier;
@@ -61,8 +61,7 @@ module.exports = {
                 obj.solo.win = Solodata.wins;
                 obj.solo.lose = Solodata.losses;
             }
-            
-            if(Flexdata === null) {
+            if(Flexdata === undefined) {
                 resetFlex();
             } else {
                 obj.flex.tier = Flexdata.tier;
