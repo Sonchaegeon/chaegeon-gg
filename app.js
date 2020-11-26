@@ -52,6 +52,8 @@ app.get('/multi', async (req, res) => {
             else if(winrate <= 45 && winrate >= 41) teamScore -= 15;
             else if(winrate <= 40 && winrate >= 36) teamScore -= 25;
             else teamScore -= 100;
+
+            
         }
         res.json(teamScore);
     } else{
