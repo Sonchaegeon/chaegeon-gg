@@ -27,16 +27,33 @@ app.get('/', async (req, res) => {
     res.render('index', {analytics: analytics});
 });
 
-app.get('/multi', (req, res) => {
+app.get('/multi', async (req, res) => {
     if(req.query.name) {
         let names = req.query.name;
-
+        let teamScore = 100;
         names = names.split(/\s님이 방에 참가했습니다./g);
         for(let i = 0; i < 5; i++){
-            names[i] = names[i].replace("\r\n    ", "");
             names[i] = names[i].replace("\r\n", "");
         }
-        res.json(names);
+        console.log(names);
+        
+        for(let i = 0; i < 5; i++){
+            const summoner = await api.SummonerName(names[i]);
+            const rank = await api.Rank(summoner.id);
+            const winrate = parseInt(rank.solo.win / (rank.solo.win + rank.solo.lose) * 100);
+
+            console.log(winrate);
+            // 랭크 승률
+            if(winrate >= 66) teamScore += 25;
+            else if(winrate <= 65 && winrate >= 61) teamScore += 20;
+            else if(winrate <= 60 && winrate >= 56) teamScore += 15;
+            else if(winrate <= 55 && winrate >= 51) teamScore += 10;
+            else if(winrate <= 50 && winrate >= 46) teamScore -= 10;
+            else if(winrate <= 45 && winrate >= 41) teamScore -= 15;
+            else if(winrate <= 40 && winrate >= 36) teamScore -= 25;
+            else teamScore -= 100;
+        }
+        res.json(teamScore);
     } else{
         res.render('multi');
     }
