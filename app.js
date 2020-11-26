@@ -60,7 +60,10 @@ app.get('/search', async (req, res, next) => {
             const champName = await api.GetChampName(matchLists[i].champion);
             const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId, champName);
             const getEnemyChampName = await api.GetChampName(participant.enemy);
-            const getEnemyChampIcon = await api.GetChampIcon(getEnemyChampName);
+            let getEnemyChampIcon;
+            if(getEnemyChampName){
+                getEnemyChampIcon = await api.GetChampIcon(getEnemyChampName);
+            }
 
             //Matches
             champion[i] = champName;
