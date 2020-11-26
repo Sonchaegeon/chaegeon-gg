@@ -28,7 +28,11 @@
     <h2>최근 게임</h2>
     <% for(var i = 0; i < 10; i++) {%>
         <p>게임모드: <%=gameMode[i]%></p> 
-        <p><img src="<%=champIcon[i]%>" width="80px" height="80px"> <%=lane[i]%> <%=champion[i]%> vs <%=enemyChampName[i]%>  <img src="<%=enemyChampIcon[i]%>" width="80px" height="80px"></p>
+        <p><img src="<%=champIcon[i]%>" width="80px" height="80px"> <%=lane[i]%> <%=champion[i]%> 
+            <%if(gameMode[i] === "CLASSIC") {%>
+                 vs <%=enemyChampName[i]%>  <img src="<%=enemyChampIcon[i]%>" width="80px" height="80px">
+            <% } %>
+            </p>
             <%if(gameWin[i] === true) {%>
                 승리
             <% } else { %>
