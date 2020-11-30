@@ -35,7 +35,6 @@ app.get('/multi', async (req, res) => {
         for(let i = 0; i < 5; i++){
             names[i] = names[i].replace("\r\n", "");
         }
-        console.log(names);
         
         for(let i = 0; i < 5; i++){
             const summoner = await api.SummonerName(names[i]);
