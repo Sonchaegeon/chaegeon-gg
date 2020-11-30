@@ -86,6 +86,25 @@ module.exports = {
             }
         }
     },
+    GetPerksPath: async (id, perk0) => {
+        const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
+        const perksList = response.data;
+        let slots, obj;
+
+        for(var i = 0; i < perksList.length; i++){
+            if(perksList[i].id == id){
+                slots = perksList[i].slots;
+                break;
+            }
+        }
+        for(var i = 0; i < slots.length; i++){
+            for(var j = 0; j < slots[i].runes.length; j++){
+                if(slots[i].runes[j].id == perk0){
+                    return slots[i].runes[j].icon;
+                }
+            }
+        }
+    },
     GetMatcheLists: async (summonerAccountId) => {
         //4753465962
         const response = await axios.get(`https://kr.api.riotgames.com/lol/match/v4/matchlists/by-account/${summonerAccountId}?api_key=${api_key}`)
@@ -103,8 +122,10 @@ module.exports = {
     GetParticipants: async (participants, participantIdentities, accountId, championName) => {
         let participantId;
         let player;
-        let items = [];
-        let obj = {};
+        let obj = {
+            items: [],
+            perks: [],
+        };
         for(var i = 0; i < 10; i++){
             if(participantIdentities[i].player.accountId == accountId){
                 participantId = i;
@@ -125,15 +146,16 @@ module.exports = {
         }
 
         obj.champIcon = `https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/champion/${championName}.png`;
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item1}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item2}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item3}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item4}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item5}.png`);
-        items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item6}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item0}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item1}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item2}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item3}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item4}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item5}.png`);
+        obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item6}.png`);
 
-        obj.items = items;
+        obj.perks[0] = await module.exports.GetPerksPath(player.stats.perkPrimaryStyle, player.stats.perk0);
+
         obj.lane = player.timeline.lane;
         return obj;
     },
