@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-var api_key = "RGAPI-9c558ad3-c8a6-46ad-91cb-3758e3afe3dd";
+var api_key = "RGAPI-217ffdbe-f8e9-4474-931f-2265e03cd26c";
 var jsonVersion = "10.24.1";
 module.exports = {
     SummonerName: async (name) => {
@@ -86,22 +86,31 @@ module.exports = {
             }
         }
     },
-    GetPerksPath: async (id, perk0) => {
+    GetPerkPrimary: async (id, perk0) => {
         const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
         const perksList = response.data;
-        let slots, obj;
-
+        let mainSlots;
         for(var i = 0; i < perksList.length; i++){
             if(perksList[i].id == id){
-                slots = perksList[i].slots;
-                break;
+                mainSlots = perksList[i].slots;
             }
         }
-        for(var i = 0; i < slots.length; i++){
-            for(var j = 0; j < slots[i].runes.length; j++){
-                if(slots[i].runes[j].id == perk0){
-                    return slots[i].runes[j].icon;
+
+        for(var i = 0; i < mainSlots.length; i++){
+            for(var j = 0; j < mainSlots[i].runes.length; j++){
+                if(mainSlots[i].runes[j].id == perk0){
+                    return mainSlots[i].runes[j].icon;
                 }
+            }
+        }
+    },
+    GetPerkSub: async (id) => {
+        const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
+        const perksList = response.data;
+        let subSlots;
+        for(var i = 0; i < perksList.length; i++){
+            if(perksList[i].id == id){
+                subSlots = perksList[i].slots;
             }
         }
     },
@@ -154,7 +163,8 @@ module.exports = {
         obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item5}.png`);
         obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item6}.png`);
 
-        obj.perks[0] = await module.exports.GetPerksPath(player.stats.perkPrimaryStyle, player.stats.perk0);
+        obj.perks[0] = await module.exports.GetPerkPrimary(player.stats.perkPrimaryStyle, player.stats.perk0);
+        //obj.prtks[1] = await module.exports.GetPerkSub(player.stats.perkSubStyle);
 
         obj.lane = player.timeline.lane;
         return obj;
