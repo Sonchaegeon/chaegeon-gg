@@ -93,6 +93,7 @@ module.exports = {
         for(var i = 0; i < perksList.length; i++){
             if(perksList[i].id == id){
                 mainSlots = perksList[i].slots;
+                break;
             }
         }
 
@@ -107,10 +108,9 @@ module.exports = {
     GetPerkSub: async (id) => {
         const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
         const perksList = response.data;
-        let subSlots;
         for(var i = 0; i < perksList.length; i++){
             if(perksList[i].id == id){
-                subSlots = perksList[i].slots;
+                return perksList[i].icon;
             }
         }
     },
@@ -164,7 +164,7 @@ module.exports = {
         obj.items.push(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/img/item/${player.stats.item6}.png`);
 
         obj.perks[0] = await module.exports.GetPerkPrimary(player.stats.perkPrimaryStyle, player.stats.perk0);
-        //obj.prtks[1] = await module.exports.GetPerkSub(player.stats.perkSubStyle);
+        obj.perks[1] = await module.exports.GetPerkSub(player.stats.perkSubStyle);
 
         obj.lane = player.timeline.lane;
         return obj;

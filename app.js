@@ -71,7 +71,8 @@ app.get('/search', async (req, res, next) => {
         const rank = await api.Rank(summoner.id);
         const matchLists = await api.GetMatcheLists(summoner.accountId);
 
-        let champion = [], gameWin = [], kill = [], death = [], assist = [], lane = [], items = [], champIcon = [], enemy = [], enemyChampName = [], enemyChampIcon = [], gameMode = [], perk0 = [];
+        let champion = [], gameWin = [], kill = [], death = [], assist = [], lane = [], items = [], champIcon = [], enemy = [], enemyChampName = [], enemyChampIcon = [], 
+        gameMode = [], perk0 = [], perk1 = [];
 
         for(var i = 0; i < 10; i++){
             const matches = await api.GetMatches(matchLists[i].gameId);
@@ -94,6 +95,7 @@ app.get('/search', async (req, res, next) => {
             champIcon[i] = participant.champIcon;
             enemy[i] = participant.enemy;
             perk0[i] = participant.perks[0];
+            perk1[i] = participant.perks[1];
             enemyChampName[i] = getEnemyChampName;
             enemyChampIcon[i] = getEnemyChampIcon;
             gameMode[i] = matches.gameMode;
@@ -135,6 +137,7 @@ app.get('/search', async (req, res, next) => {
             champIcon: champIcon,
             enemy: enemy,
             perk0: perk0,
+            perk1: perk1,
             enemyChampName: enemyChampName,
             enemyChampIcon: enemyChampIcon,
             gameMode: gameMode,
