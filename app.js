@@ -74,7 +74,7 @@ app.get('/search', async (req, res, next) => {
         let champion = [], gameWin = [], kill = [], death = [], assist = [], lane = [], items = [], champIcon = [], enemy = [], enemyChampName = [], enemyChampIcon = [], 
         gameMode = [], perk0 = [], perk1 = [];
 
-        for(var i = 0; i < 10; i++){
+        for(let i = 0; i < 10; i++){
             const matches = await api.GetMatches(matchLists[i].gameId);
             const champName = await api.GetChampName(matchLists[i].champion);
             const participant = await api.GetParticipants(matches.participants, matches.participantIdentities, summoner.accountId, champName);

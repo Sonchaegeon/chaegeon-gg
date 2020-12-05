@@ -26,7 +26,7 @@
         <% } %>    
     <hr>
     <h2>최근 게임</h2>
-    <% for(var i = 0; i < 10; i++) {%>
+    <% for(let i = 0; i < 10; i++) {%>
         <p>게임모드: <%=gameMode[i]%></p> 
         <p><img src="<%=champIcon[i]%>" width="80px" height="80px"> <%=lane[i]%> <%=champion[i]%> 
             <%if(gameMode[i] === "CLASSIC") {%>
@@ -39,7 +39,7 @@
                 패배
             <% } %>
         <%=kill[i]%> / <%=death[i]%> / <%=assist[i]%> 
-        <% for(var j = 0; j < 7; j++) { %>
+        <% for(let j = 0; j < 7; j++) { %>
             <% if(items[i][j] == 'https://ddragon.leagueoflegends.com/cdn/10.24.1/img/item/0.png') { %>
                 <% continue %> 
             <% } %>

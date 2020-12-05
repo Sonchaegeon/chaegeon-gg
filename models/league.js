@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-var api_key = "RGAPI-9ee4addd-469d-43e6-ad4a-66140d5ae8bc";
-var jsonVersion = "10.24.1";
+let api_key = "RGAPI-fdfcbaab-7f22-4429-bc76-078398d6ef0c";
+let jsonVersion = "10.24.1";
 module.exports = {
     SummonerName: async (name) => {
         // id: 7NbCIl_c5YUSGy9VXVaNjJ6Qor9Cuggyss9YVM2kLZL9Wq0
@@ -43,7 +43,7 @@ module.exports = {
         if(response.data.length != 0) {
             let soloRankIndex = null;
             let flexRankIndex = null;
-            for(var i = 0; i < response.data.length; i++){
+            for(let i = 0; i < response.data.length; i++){
                 if(response.data[i].queueType === "RANKED_SOLO_5x5"){
                     soloRankIndex = i;
                 } else if (response.data[i].queueType === "RANKED_FLEX_SR"){
@@ -80,7 +80,7 @@ module.exports = {
     GetChampName: async (id) => {
         const response = await axios.get(`http://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/en_US/champion.json`)
         const championList = response.data.data;
-        for(var i in championList){
+        for(let i in championList){
             if(championList[i].key == id){
                 return championList[i].name;
             }
@@ -90,15 +90,15 @@ module.exports = {
         const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
         const perksList = response.data;
         let mainSlots;
-        for(var i = 0; i < perksList.length; i++){
+        for(let i = 0; i < perksList.length; i++){
             if(perksList[i].id == id){
                 mainSlots = perksList[i].slots;
                 break;
             }
         }
 
-        for(var i = 0; i < mainSlots.length; i++){
-            for(var j = 0; j < mainSlots[i].runes.length; j++){
+        for(let i = 0; i < mainSlots.length; i++){
+            for(let j = 0; j < mainSlots[i].runes.length; j++){
                 if(mainSlots[i].runes[j].id == perk0){
                     return mainSlots[i].runes[j].icon;
                 }
@@ -108,7 +108,7 @@ module.exports = {
     GetPerkSub: async (id) => {
         const response = await axios.get(`https://ddragon.leagueoflegends.com/cdn/${jsonVersion}/data/ko_KR/runesReforged.json`)
         const perksList = response.data;
-        for(var i = 0; i < perksList.length; i++){
+        for(let i = 0; i < perksList.length; i++){
             if(perksList[i].id == id){
                 return perksList[i].icon;
             }
@@ -135,7 +135,7 @@ module.exports = {
             items: [],
             perks: [],
         };
-        for(var i = 0; i < 10; i++){
+        for(let i = 0; i < 10; i++){
             if(participantIdentities[i].player.accountId == accountId){
                 participantId = i;
                 break;
@@ -147,7 +147,7 @@ module.exports = {
         obj.death = player.stats.deaths;
         obj.assist = player.stats.assists;
 
-        for(var i = 0; i < 10; i++){
+        for(let i = 0; i < 10; i++){
             if(participants[i].teamId != player.teamId && player.timeline.lane === participants[i].timeline.lane){
                 obj.enemy = participants[i].championId;
                 break;
