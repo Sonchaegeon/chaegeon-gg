@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 require('dotenv').config();
-let api_key = "RGAPI-b6c3c44a-96a1-48e6-968e-b64fb3ae896d";
+let api_key = "RGAPI-6bd4e851-ed61-4e66-ad76-8849fe88aa2c";
 let jsonVersion = "10.24.1";
 module.exports = {
     SummonerName: async (name) => {
